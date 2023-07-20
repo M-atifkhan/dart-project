@@ -98,7 +98,13 @@ viewCustomerOrders() {
   print('-----------------------');
 }
 addMenu(){
+print('Enter the name of the new item: ');
+  String itemName = stdin.readLineSync()!;
+  print('Enter the price of $itemName: ');
+  double itemPrice = double.parse(stdin.readLineSync()!);
 
+  menu[itemName] = itemPrice;
+  print('New item added to the menu: $itemName - \RS:$itemPrice');
 }
 
 managerLogin(List<Map<String, String>> users) {
@@ -119,7 +125,7 @@ managerLogin(List<Map<String, String>> users) {
     if (managerOption == 1) {
       viewCustomerOrders();
     }else if (managerOption == 2){
-      addMenu();
+       addMenu();
     }else if (managerOption == 3){
       isDOne = false;
     }else{
