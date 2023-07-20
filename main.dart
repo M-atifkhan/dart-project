@@ -1,5 +1,6 @@
 import 'dart:io';
 void main() {
+  
   List<Map<String, String>> registeredUsers = [
     {'username': 'manager', 'password': '123456'},
     {'username': 'atif', 'password': '123456'},
@@ -29,7 +30,7 @@ void main() {
 // List of menu items and their prices
 Map<String, double> menu = {
   'pizza': 500,
-  'burger': 450,
+  'burger':450,
   'pasta': 350,
   'salad': 250,
 };
@@ -37,10 +38,10 @@ Map<String, double> menu = {
 // List to store customer orders
 Map<String, List<String>> customerOrders = {};
 
-void displayMenu() {
+displayMenu() {
   print('--- Menu ---');
   menu.forEach((item, price) {
-    print('$item: \RS:${price.toStringAsFixed(2)}');
+    print('$item: \RS:${price}');
   });
   print('------------');
 }
@@ -50,7 +51,7 @@ List<String> takeOrder(String customerName) {
   String item;
   do {
     displayMenu();
-    print("Enter an item to order (or 'done' to finish): ");
+    print("Enter an item to order (enter done to finish): ");
     item = stdin.readLineSync()!;
 
     if (item != 'done' && menu.containsKey(item)) {
@@ -73,8 +74,8 @@ double calculateTotal(List<String> order) {
   return total;
 }
 
-void createUser(List<Map<String, String>> users) {
-  stdout.write('Enter your desired username: ');
+createUser(List<Map<String, String>> users) {
+  stdout.write('Enter your name: ');
   String username = stdin.readLineSync()!;
 
   bool isUsernameTaken = users.any((user) => user['username'] == username);
@@ -85,20 +86,22 @@ void createUser(List<Map<String, String>> users) {
 
   stdout.write('Enter your password: ');
   String password = stdin.readLineSync()!;
-
   users.add({'username': username, 'password': password});
   print('User created successfully. Welcome, $username');
 }
 
-void viewCustomerOrders() {
+viewCustomerOrders() {
   print('--- Customer Orders ---');
   customerOrders.forEach((customer, order) {
     print('$customer: ${order.join(', ')}');
   });
   print('-----------------------');
 }
+addMenu(){
 
-void managerLogin(List<Map<String, String>> users) {
+}
+
+managerLogin(List<Map<String, String>> users) {
   print('Enter username: ');
   String username = stdin.readLineSync()!;
   print('Enter password: ');
@@ -107,13 +110,29 @@ void managerLogin(List<Map<String, String>> users) {
   bool isLoggedIn = users.any((user) => user['username'] == username && user['password'] == password);
   if (isLoggedIn) {
     print('Logged in as a manager.');
-    viewCustomerOrders();
+    bool isDOne = true;
+    while (isDOne == true) {
+    print('Press 1: View Customer Order');
+    print('Press 2: Add Menu');
+    print('Press 3: logout');
+    int managerOption = int.parse(stdin.readLineSync()!);
+    if (managerOption == 1) {
+      viewCustomerOrders();
+    }else if (managerOption == 2){
+      addMenu();
+    }else if (managerOption == 3){
+      isDOne = false;
+    }else{
+      print("Invalid");
+    }
+    }
+    
   } else {
     print('Invalid credentials.');
   }
 }
 
-void customerLogin(List<Map<String, String>> users) {
+customerLogin(List<Map<String, String>> users) {
   print('Press 1: Existing Customer');
   print('Press 2: New Customer');
   int customerOption = int.parse(stdin.readLineSync()!);
@@ -132,12 +151,12 @@ void customerLogin(List<Map<String, String>> users) {
       print('Press 2: Takeaway');
       print('Press 3: Delivery');
       int option = int.parse(stdin.readLineSync()!);
-
+      option;
       List<String> order = takeOrder(username);
       double total = calculateTotal(order);
 
       print('Order details: ${order.join(', ')}');
-      print('Total: \Rs:${total.toStringAsFixed(2)}');
+      print('Total: \ ${total}rs');
     } else {
       print('Invalid credentials.');
     }
