@@ -2,11 +2,15 @@ import 'dart:io';
 void main() {
   
   List<Map<String, String>> registeredUsers = [
-    {'username': 'manager', 'password': '123456'},
     {'username': 'atif', 'password': '123456'},
     {'username': 'imran', 'password': '123456'},
     {'username': 'bilal', 'password': '123456'},
     {'username': 'tabeer', 'password': '123456'},
+  ];
+   List<Map<String, String>> managerUser= [
+    {'username': 'manager', 'password': '123456'},
+    {'username': 'manager1', 'password': '1234'},
+     {'username': 'manager2', 'password': '123'}
   ];
   print('*** Welcome to the Restaurant ***');
   bool exitIs = false;
@@ -16,7 +20,7 @@ void main() {
     print('Press 3: Exit');
     int userType = int.parse(stdin.readLineSync()!);
     if (userType == 1) {
-      managerLogin(registeredUsers);
+      managerLogin(managerUser);
     } else if (userType == 2) {
       customerLogin(registeredUsers);
     } else if (userType == 3) {
@@ -91,7 +95,7 @@ createUser(List<Map<String, String>> users) {
 }
 
 viewCustomerOrders() {
-  print('--- Customer Orders ---');
+  print('--- Customer Orders ---clea');
   customerOrders.forEach((customer, order) {
     print('$customer: ${order.join(', ')}');
   });
