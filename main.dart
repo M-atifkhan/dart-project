@@ -104,7 +104,7 @@ print('Enter the name of the new item: ');
   double itemPrice = double.parse(stdin.readLineSync()!);
 
   menu[itemName] = itemPrice;
-  print('New item added to the menu: $itemName - \RS:$itemPrice');
+  print('New item added to the menu: $itemName - \ Rs:$itemPrice');
 }
 
 managerLogin(List<Map<String, String>> users) {
